@@ -16,7 +16,7 @@ All platforms are connected via [matrix-chat-superbridge](https://github.com/ima
 
 ```bash
 # From the imagineering-infra repo
-./scripts/deploy-to.sh 34.40.229.206 site
+./scripts/deploy-to.sh 149.118.69.221 site
 ```
 
-Served by Caddy from `/srv/site` on the GCP instance.
+Served by Caddy from `/srv/site` on the OCI instance (Sydney).
