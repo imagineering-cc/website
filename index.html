@@ -346,13 +346,12 @@
   <h2>Hiring?</h2>
   <p class="sub">Tell us about your project and we'll get back to you.</p>
 
-  <form action="https://formsubmit.co/langer.robin@gmail.com" method="POST" class="contact-form">
+  <div id="form-status"></div>
+  <form action="/api/contact" method="POST" class="contact-form">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
     <input type="text" name="name" placeholder="Your name" required>
     <input type="email" name="email" placeholder="Your email" required>
     <textarea name="message" placeholder="Tell us about the role or project" rows="4" required></textarea>
-    <input type="hidden" name="_subject" value="New enquiry from imagineering.cc">
-    <input type="hidden" name="_next" value="https://imagineering.cc">
-    <input type="hidden" name="_captcha" value="false">
     <button type="submit" class="btn-submit">Send message</button>
   </form>
 </main>
@@ -413,6 +412,19 @@
     html.dataset.theme = next;
     localStorage.setItem('iai-theme', next);
   });
+
+  // Flash message for form submission
+  const params = new URLSearchParams(location.search);
+  const status = document.getElementById('form-status');
+  if (params.has('sent')) {
+    status.textContent = 'Message sent — we\u2019ll be in touch!';
+    status.style.cssText = 'color: var(--accent); font-weight: 600; margin-bottom: 1rem;';
+    history.replaceState(null, '', location.pathname);
+  } else if (params.has('error')) {
+    status.textContent = 'Something went wrong — please try again.';
+    status.style.cssText = 'color: #c0392b; font-weight: 600; margin-bottom: 1rem;';
+    history.replaceState(null, '', location.pathname);
+  }
 </script>
 
 </body>
