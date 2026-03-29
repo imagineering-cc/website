@@ -413,6 +413,15 @@
     localStorage.setItem('iai-theme', next);
   });
 
+  // Submit feedback — show "Sending..." while form posts
+  const form = document.querySelector('.contact-form');
+  const btn = form.querySelector('.btn-submit');
+  form.addEventListener('submit', () => {
+    btn.textContent = 'Sending\u2026';
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+  });
+
   // Flash message for form submission
   const params = new URLSearchParams(location.search);
   const status = document.getElementById('form-status');
