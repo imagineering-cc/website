@@ -187,11 +187,12 @@
     .dashboard-link { grid-column: 1 / -1; text-align: center; }
     .dashboard-link a {
       color: var(--text);
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
       font-size: 0.95rem;
       transition: color 0.12s;
     }
-    .dashboard-link a:hover { color: var(--accent); }
+    .dashboard-link a:hover { color: var(--accent); text-decoration-color: var(--accent); }
     .footer-left { display: flex; align-items: center; }
     .footer-links { display: flex; gap: 1.1rem; flex-wrap: wrap; grid-column: 1 / -1; }
     .footer-links a {
@@ -344,7 +345,7 @@
 <footer>
   <div class="dashboard-link">
     <a href="https://raggedr.github.io/imagineering-dashboard/" target="_blank" rel="noopener">
-      See what our imagineers are up to (Imagineering dashboard)
+      See what our Imagineers are up to &rarr;
     </a>
   </div>
   <div class="footer-left">
