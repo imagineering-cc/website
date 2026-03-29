@@ -26,4 +26,4 @@ jobs:
             --exclude '.github' \
             --exclude 'README.md' \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new" \
-            ./ "${DEPLOY_USER}@${DEPLOY_HOST}:/srv/site/"
+            ./ "${DEPLOY_USER}@${DEPLOY_HOST}:/home/nick/apps/site/"
