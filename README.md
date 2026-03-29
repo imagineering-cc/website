@@ -14,6 +14,9 @@ All platforms are connected via [matrix-chat-superbridge](https://github.com/ima
 
 ## Deploy
 
+Merging to `main` auto-deploys to production via GitHub Actions.
+
+For manual deploys:
 ```bash
 # From the imagineering-infra repo
 ./scripts/deploy-to.sh 149.118.69.221 site
