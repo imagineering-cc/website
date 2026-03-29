@@ -413,27 +413,40 @@
     localStorage.setItem('iai-theme', next);
   });
 
-  // Submit feedback — show "Sending..." while form posts
+  // Contact form — submit via fetch, stay on page
   const form = document.querySelector('.contact-form');
   const btn = form.querySelector('.btn-submit');
-  form.addEventListener('submit', () => {
+  const status = document.getElementById('form-status');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
     btn.textContent = 'Sending\u2026';
     btn.disabled = true;
     btn.style.opacity = '0.6';
-  });
+    status.textContent = '';
 
-  // Flash message for form submission
-  const params = new URLSearchParams(location.search);
-  const status = document.getElementById('form-status');
-  if (params.has('sent')) {
-    status.textContent = 'Message sent — we\u2019ll be in touch!';
-    status.style.cssText = 'color: var(--accent); font-weight: 600; margin-bottom: 1rem;';
-    history.replaceState(null, '', location.pathname);
-  } else if (params.has('error')) {
-    status.textContent = 'Something went wrong — please try again.';
-    status.style.cssText = 'color: #c0392b; font-weight: 600; margin-bottom: 1rem;';
-    history.replaceState(null, '', location.pathname);
-  }
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new URLSearchParams(new FormData(form))
+      });
+      const data = await res.json();
+      if (data.status === 'sent') {
+        status.textContent = 'Message sent \u2014 we\u2019ll be in touch!';
+        status.style.cssText = 'color: var(--accent); font-weight: 600; margin-bottom: 1rem;';
+        form.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      status.textContent = 'Something went wrong \u2014 please try again.';
+      status.style.cssText = 'color: #c0392b; font-weight: 600; margin-bottom: 1rem;';
+    }
+    btn.textContent = 'Send message';
+    btn.disabled = false;
+    btn.style.opacity = '';
+  });
 </script>
 
 </body>
